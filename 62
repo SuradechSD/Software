@@ -1,0 +1,150 @@
+public class Main {
+public static void main(String[] args) {
+Milk p1 = new Milk(150);
+p1.setVolumn(250);
+Sugar p2 = new Sugar(50);
+p2.setWeight(250);
+Product p3 = new Coffee(250);
+p3.setWeight(50);
+Product p4 = new Coffee(250);
+p4.setWeight(50);
+InventoryCart ic = new InventoryCart (10);
+ic.add(p1);
+ic.add(p2);
+ic.add(p3);
+ic.add(p4);
+Cashier c = new Cashier("John Doe");
+c.printReceipt(ic);
+}
+}
+public class Cashier {
+private String customer;
+private int total=0;
+public Cashier(String customer){
+//รับรถเข็น
+this.customer=customer;
+}
+public void printReceipt(InventoryCart c){
+//ดึงเอาสินค้าออกจากรถเข็นทั้งหมดเพื่อน ามาแสดงรายการและค านวณสินค้า
+int count = c.getAllProduct().length;//แทนสินค้าทั้งหมดเพื่อมารัน
+System.out.println("\t-------------\t");
+System.out.println("Pumpkin Shop ("+customer+")");
+for(int i = 0 ; i<count;i++){
+int number=0;
+for(int j = i ; j<count;j++){
+if(c.getProductAt(i).equals(c.getProductAt(j))&&!c.getProductAt(j).isCheck()){
+number ++;
+c.getProductAt(j).setCheck(true);
+}
+}
+Product pc = c.getProductAt(i);
+pc.setAmount(number);
+if (number != 0) {
+System.out.println(number+" x "+c.getProductAt(i).toString());
+}
+total+=pc.getPrice()*number;
+}
+System.out.println("\t-------------\t");
+System.out.println("\t\tTotal\t\t"+total+"$");
+}
+}
+public class Product {
+private int amount;
+protected String name;
+protected int price;
+protected String code;
+protected int weight;
+private boolean check;
+public Product(String code,String name,int price){
+this.code = code;
+this.name = name;
+this.price = price;
+}
+public boolean equals(Object otherObj){
+if(this==otherObj)return true;
+if(otherObj == null || !(otherObj instanceof Product))
+return false;
+Product other = (Product) otherObj;
+return (this.getClass().getSimpleName()==other.getClass().getSimpleName());
+}
+public Product(int p) {
+this.price=p;
+}
+public void setWeight(int weight){
+this.weight=weight;
+}
+public int getWeight(){
+return this.weight;
+}
+public boolean setCheck(boolean check){
+return this.check=check;
+}
+public boolean isCheck(){
+return this.check;
+}
+public void setAmount(int amount){
+this.amount=amount;
+}
+public int getAmount(){
+return this.amount;
+}
+public String getName(){
+return this.name;
+}
+public int getPrice(){
+return this.price;
+}
+public String getCode(){
+return this.code;
+}
+public String toString(){
+return getClass().getSimpleName()+"\t"+this.getWeight()+"\tGram\t"+(this.getPrice()*amount);
+}
+}
+public class Coffee extends Product{
+public Coffee(int p){
+super(p);
+}
+}
+public class InventoryCart {
+private static int numproduct = 0;
+private Product[] products;
+public InventoryCart(int num){
+products = new Product[num];//ก าหนดจ านวนสินค้า
+}
+public void add(Product p){
+//น าสินค้าใส่รถ
+products[numproduct++]= p;
+}
+public Product getProductAt(int index){
+//น าสินค้าออกจากรถตามที่เลือก
+return products[index];
+}
+public Product[] getAllProduct(){
+//น าสินค้าทั้งหมดออกจากรถ
+Product[] pd = new Product[numproduct];
+for(int i =0;i<numproduct;i++)
+pd[i]=products[i];
+return pd;
+}
+}
+public class Sugar extends Product {
+public Sugar(int p){
+super(p);
+}
+}
+public class Milk extends Product {
+protected int Volumn;
+public Milk(int p){
+super(p);
+}
+public void setVolumn(int Volumn){
+this.Volumn=Volumn;
+}
+public int getVolumn(){
+return this.Volumn;
+}
+public String toString(){
+return getClass().getSimpleName()+"\t"+this.getVolumn()+"\tCC\t"+this.getPrice();
+}
+}
