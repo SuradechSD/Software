@@ -15,7 +15,7 @@ public class test {
         num = x+y;
 //-----------------------------------------------------
         System.out.println(num);
-*/
+
 
 //=====================================================
         int b,n;
@@ -29,6 +29,36 @@ public class test {
 
         System.out.println("answer : "+ (b+n));
         sc.close();
-        
-    }
+*/        
+    
+        double side , length , number;
+
+        Scanner triangle = new Scanner(System.in);
+
+        System.out.println("Enter triangle side :");
+        side = triangle.nextDouble();
+        System.out.println("Enter prism length :");
+        length = triangle.nextDouble();
+
+        number = (((Math.sqrt(3)/4)*Math.pow(side, 2)*2)+(side*length)*3);
+
+        System.out.println(number);
+
+        triangle.close();
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

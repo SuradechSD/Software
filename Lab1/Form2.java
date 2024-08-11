@@ -34,6 +34,5 @@ public class Form2 {
             System.out.print("X-intercept");
         sc.close();  
     }
-    
   
 }

@@ -1,18 +1,16 @@
-/*package Lab4;
+package Lab4;
 
 public class Main {
-	public static void main(String[] args) {
+    public static void main(String[] args) {
+        Date d = new Date(24, 8, 2004);
+        /*d.setday(40);
+		d.getday();
+		d.setmonth(6);
+		d.getmonth();
+		d.setyear(1900);
+		d.getyear();*/
 
-		Product p1 = new Product("XA1101","Milk",150);
-		Product p2 = new Product("XA1102","Suger",50);
-		Product p3 = new Product("XA1103","Coffee",250);
-		InventoryCart ic = new InventoryCart (10);
-
-		ic.add(p1);
-		ic.add(p2);
-		ic.add(p3);
-		Cashier c = new Cashier("John Doe");
-		c.printReceipt(ic);
-		
-	}
-}*/
+        System.out.print(d);
+        
+    }
+}
